@@ -9,7 +9,6 @@ const generateSchema = (
   type: string,
   save: boolean = false
 ): JSONSchema7 => {
-  console.log(path.join(cwd, loc));
   // create schema config
   const config: Config = {
     path: path.join(cwd, loc),
