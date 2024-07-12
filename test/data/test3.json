@@ -1,0 +1,5 @@
+{
+  "bar1": 123,
+  "bar2": "incorrect type",
+  "bar4": false
+}
