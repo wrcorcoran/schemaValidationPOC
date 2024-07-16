@@ -1,7 +1,7 @@
 import { createGenerator, Config } from 'ts-json-schema-generator';
 import { JSONSchema7 } from 'json-schema';
-import { writeFileSync } from 'fs';
-import path from 'path';
+import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs';
+import path, { dirname } from 'path';
 
 const generateSchema = (
   cwd: string,
@@ -41,10 +41,18 @@ const saveSchema = (cwd: string, schema: JSONSchema7): boolean => {
 
   // turn schema to string
   const jsonString: string = JSON.stringify(schema, null, 2);
-  const address: string = `/schema/${schema.title}.json`;
+  const address: string = `${cwd}/schema/${schema.title}.json`;
 
   // try to write to correct address
   try {
+    // grab directory from address
+    const directory = dirname(address);
+
+    // check if directory exists, if no, make it
+    if (!existsSync(directory)) {
+      mkdirSync(directory, { recursive: true });
+    }
+
     writeFileSync(address, jsonString, 'utf8');
   } catch {
     console.error(`failed to write to ${address}`);
@@ -55,4 +63,13 @@ const saveSchema = (cwd: string, schema: JSONSchema7): boolean => {
   return true;
 };
 
-export { generateSchema, saveSchema };
+const loadSchema = (cwd: string, name: string): JSONSchema7 => {
+  // open requested schema file and convert to JSONSchema7,
+  // which we know it is, then return
+  const file: JSONSchema7 = JSON.parse(
+    readFileSync(`${cwd}/schema/${name}.json`, 'utf-8')
+  ) as JSONSchema7;
+  return file;
+};
+
+export { generateSchema, saveSchema, loadSchema };

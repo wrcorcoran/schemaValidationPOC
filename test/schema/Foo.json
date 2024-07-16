@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/Foo",
+  "definitions": {
+    "Foo": {
+      "type": "object",
+      "properties": {
+        "bar1": {
+          "type": "string"
+        },
+        "bar2": {
+          "type": "number"
+        },
+        "bar3": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "bar1",
+        "bar2",
+        "bar3"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "title": "Foo"
+}
