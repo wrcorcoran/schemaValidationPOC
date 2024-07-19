@@ -17,6 +17,9 @@ import BarSchema from './schema/bar.json';
 import { Bar } from './types';
 
 const example = async (input: unknown) => {
+  // this prepSchema(BarSchema) can be simplified into another function
+  // where you don't have to import the BarSchema and can just
+  // import Bar
   if (!isValidatedBySchema(input, prepSchema(BarSchema))) {
     console.log(`[FAILED VALIDATION] ${JSON.stringify(input)}`);
     return;
