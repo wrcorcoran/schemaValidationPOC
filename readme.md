@@ -4,6 +4,8 @@
 
 The following is a proof of concept for a safe, lightweight, and efficient`type` and `interface` validator for unknown (typically, JSON) data.
 
+**Note**: can easily be modified to work with just specific files/types/etc.
+
 ### Example Usage:
 
 1. Store all types in a `types.ts` or `types.tsx` file. The directories do not matter as long as they are accessible by your entrypoint.
